@@ -1,0 +1,4 @@
+MOK setup popup issue - https://askubuntu.com/questions/1063282/stuck-in-terminal-at-configuring-secure-boot
+
+Install virtualbox - https://phoenixnap.com/kb/install-virtualbox-on-ubuntu
+

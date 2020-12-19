@@ -3,7 +3,7 @@ Create a mongodb deployment using the mongo image.
 Goto dockerhub and check for any standard environment variables to be used for this image.
 From the doc, it is asking to configure username and password GVs with the exact name and the instance will run on container port 27017.
 
-Create the mongodb service as a Loadbalancer Type service so as to access it from outside the k8s cluster too.
+Create the mongodb service as a Loadbalancer Type service so as to access it from outside the k8s cluster too. Refer the bare minimum Config files in this subfolder.
 
 Execute the deployment and the services.
 Find out the IP and port exposed for the external word. 

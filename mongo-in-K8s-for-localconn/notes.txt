@@ -1,0 +1,46 @@
+
+Create a mongodb deployment using the mongo image.
+Goto dockerhub and check for any standard environment variables to be used for this image.
+From the doc, it is asking to configure username and password GVs with the exact name and the instance will run on container port 27017.
+
+Create the mongodb service as a Loadbalancer Type service so as to access it from outside the k8s cluster too.
+
+Execute the deployment and the services.
+Find out the IP and port exposed for the external word. 
+kubectl get service
+When using minikube, we wont get the IP from abl=ove command. Run the below one which will give both IP and port.
+minikube service mongodb-service-lb
+
+
+Logging inot the mongodb as admin to create databases, users and grant permissions.
+
+Get the complete pod name of the mongodb.
+kubectl get pods
+Login to the mongodb using the terminal of the container in the pod.
+kubectl exec -it mongodb-local-instance-deployment-8f6675bc5-wvmls -- bin/bash
+Now you are in the container terminal.
+Login to the mongodb using commandline. user pass is the one which we set while creating the mongodb deployment.
+mongo -u 'your-username' -p 'your-password' --authenticationDatabase 'admin'
+
+
+Create a new user with required roles. We need to specify the username password for the new user here.
+Switch to the database you want to use.I am switching to my database named 'mydatabase'.
+use mydatabase
+
+db.createUser({
+    user: 'myuser',
+    pwd: 'secret',
+    roles: [
+        { role: 'readWrite', db: 'mydatabase' }
+    ]
+})
+
+Provide additional access by grant roles in case necessary.
+
+db.grantRolesToUser(
+  "myuser",
+  [
+    { role: "readWrite", db: "business" } ,
+    { role: "readAnyDatabase", db:"admin" }
+  ]
+)

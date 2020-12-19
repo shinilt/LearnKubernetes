@@ -12,7 +12,7 @@ When using minikube, we wont get the IP from abl=ove command. Run the below one 
 minikube service mongodb-service-lb
 
 
-Logging inot the mongodb as admin to create databases, users and grant permissions.
+Logging into the mongodb as admin to create databases, users and grant permissions.
 
 Get the complete pod name of the mongodb.
 kubectl get pods
@@ -44,3 +44,7 @@ db.grantRolesToUser(
     { role: "readAnyDatabase", db:"admin" }
   ]
 )
+
+
+References :
+https://docs.mongodb.com/v2.6/tutorial/assign-role-to-user/

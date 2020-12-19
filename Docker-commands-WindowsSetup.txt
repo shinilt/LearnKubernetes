@@ -1,0 +1,28 @@
+/c/Users/Shinil/DataScience/DockerProjects/flaskapp2
+docker container ls
+docker container stop ssdscfdse
+docker images 
+docker-machine ip 
+docker run -p 4000:80 flaskapp2  
+
+docs
+https://docs.docker.com/v17.09/get-started/part2/#run-the-app
+
+mongo db-- https://blog.jeremylikness.com/blog/2018-12-27_mongodb-on-windows-in-minutes-with-docker/
+========
+docker volume create --name=mongodata ====this is done first to setup the db.need not be done every time.
+docker run --name mongodb -v mongodata:/data/db -d -p 27017:27017 mongo this will login to the initial setup without auth
+winpty docker exec -it mongodb bash
+mongo == this will take to the mongodb terminal
+database is called “mydatabase” and you want to set up a user named “myuser” with password “secret”. These two steps will take care of it for you (the database does not have to exist yet):
+use mydatabase
+db.createUser({user:"myuser", pwd:"secret", roles:[{role:"readWrite", db: "mydatabase"}]});
+remove and restart the mongodb instance
+docker stop mongodb
+docker rm mongodb
+
+docker run --name mongodb -v mongodata:/data/db -d -p 27017:27017 mongo --auth === this is to open with authentication
+docker run --name mongodb -v mongodata:/data/db -d -p 27017:27017 mongo == this is to open db without auth if setup without auth.
+the conn string will be mongodb://myuser:secret@localhost:27017/mydatabase
+
+find the ip of the virtual machine used, use above port configured

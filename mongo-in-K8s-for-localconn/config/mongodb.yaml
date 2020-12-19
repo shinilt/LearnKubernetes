@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-local-instance-deployment
+  labels:
+    app: mongodb
+spec: #specification for the deployment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec: #specification for the pod we can have multilpe containers below.
+      containers:
+      - name: mongodb
+        image: mongo #official image name , find it in docker hub documentation for mongo
+        ports:
+        - containerPort: 27017 #port exposed by mongodb in the CONTAINER. this is as in docker hub documentation
+        env:
+        # the below username and passowrd are standard env variable names to be set. as per the docker hub doc
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-username
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service-lb
+spec:
+  selector:
+    app: mongodb
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 27017 #this is the pod port exposed for the service. this can be diff from container port or targetPort
+      targetPort: 27017 #this is the container port exposed for the backened .should be same as the container port configured above

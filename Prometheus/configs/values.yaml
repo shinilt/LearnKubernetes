@@ -1,0 +1,7 @@
+mongodb:
+  uri: "mongodb://mongodb-service:27017"
+
+serviceMonitor:
+  additionalLabels:
+    release: prometheus
+#this yaml contains the bare minimum values to be corrected for enabling the promethues monitoring for the mongodb-prometheus-exporter.

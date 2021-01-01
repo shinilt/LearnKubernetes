@@ -1,1 +1,1 @@
-## For the instructions, refere the word document.
+## For the instructions, refer the word document.

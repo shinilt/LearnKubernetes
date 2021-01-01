@@ -7,3 +7,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 CMD ["python", "/app/main.py"]
+#for explanations on the file details, refer thhe files in the LearnDocker git repo.
